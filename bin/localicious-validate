@@ -33,5 +33,9 @@ loadYaml(localicipePath)
   })
   .onError(error => {
     console.error(error.description);
+    if (error.underlyingError && error.underlyingError.allErrors) {
+      console.error('The errors were:')
+      console.error(error.underlyingError.allErrors.map(x => '- ' + x).join("\n"));
+    }
     process.exit(1);
   });
